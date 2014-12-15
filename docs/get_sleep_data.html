@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>get_sleep_data module &mdash; get_jawbone_data 1.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '1.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="get_jawbone_data 1.0.1 documentation" href="index.html" />
+    <link rel="prev" title="access_jawbone module" href="access_jawbone.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="access_jawbone.html" title="access_jawbone module"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">get_jawbone_data 1.0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="access_jawbone.html"
+                        title="previous chapter">access_jawbone module</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/get_sleep_data.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-get_sleep_data">
+<span id="get-sleep-data-module"></span><h1>get_sleep_data module<a class="headerlink" href="#module-get_sleep_data" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="module-get_sleep_data"></span><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">synopsis:</th><td class="field-body">Example code to demonstrate how to &#8220;GET&#8221; JSON data from Jawbone UP API</td>
+</tr>
+</tbody>
+</table>
+<dl class="function">
+<dt id="get_sleep_data.main">
+<tt class="descclassname">get_sleep_data.</tt><tt class="descname">main</tt><big>(</big><big>)</big><a class="reference internal" href="_modules/get_sleep_data.html#main"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#get_sleep_data.main" title="Permalink to this definition">¶</a></dt>
+<dd><blockquote>
+<div>To compile this example code, run the command: <tt class="docutils literal"><span class="pre">python</span> <span class="pre">get_sleep_data.py</span> <span class="pre">user_email</span> <span class="pre">user_password</span> <span class="pre">https://jawbone.com/nudge/api/users/&#64;me/sleeps?</span> <span class="pre">&amp;</span></tt></div></blockquote>
+<ul>
+<li><dl class="first docutils">
+<dt><strong>EXAMPLE_1 :</strong> &#8220;GET&#8221; the bulk of sleep event data</dt>
+<dd><ul class="first last">
+<li><dl class="first docutils">
+<dt>Use <a class="reference internal" href="access_jawbone.html#access_jawbone.args_store" title="access_jawbone.args_store"><tt class="xref py py-func docutils literal"><span class="pre">access_jawbone.args_store()</span></tt></a> to receive the command-line arguments</dt>
+<dd><ul class="first last simple">
+<li>arg1 - <tt class="docutils literal"><span class="pre">user_email</span></tt> associated with Jawbone account</li>
+<li>arg2 - <tt class="docutils literal"><span class="pre">user_password</span></tt> associated with Jawbone account</li>
+<li>arg3 - <tt class="docutils literal"><span class="pre">data</span> <span class="pre">request</span> <span class="pre">url</span></tt> for this example <tt class="docutils literal"><span class="pre">https://jawbone.com/nudge/api/users/&#64;me/sleeps?</span></tt></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Run <a class="reference internal" href="access_jawbone.html#access_jawbone.authenticate" title="access_jawbone.authenticate"><tt class="xref py py-func docutils literal"><span class="pre">access_jawbone.authenticate()</span></tt></a> for secure access to jawbone data</dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">returns:</th><td class="field-body"><tt class="docutils literal"><span class="pre">security</span> <span class="pre">token</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Employ <a class="reference internal" href="access_jawbone.html#access_jawbone.get_data" title="access_jawbone.get_data"><tt class="xref py py-func docutils literal"><span class="pre">access_jawbone.get_data()</span></tt></a> to &#8220;GET&#8221; sleep data from Jawbone API</dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">returns:</th><td class="field-body"><tt class="docutils literal"><span class="pre">user</span> <span class="pre">xid,</span> <span class="pre">event</span> <span class="pre">xid,</span> <span class="pre">date,</span> <span class="pre">sleep</span> <span class="pre">time,</span> <span class="pre">awake</span> <span class="pre">time,</span> <span class="pre">number</span> <span class="pre">of</span> <span class="pre">awakenings,</span> <span class="pre">duration</span> <span class="pre">of</span> <span class="pre">sleep</span> <span class="pre">event,</span> <span class="pre">quality</span> <span class="pre">score,</span> <span class="pre">etc.</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</li>
+<li><p class="first">Operate on JSON data dictionary and use JSON.dumps to print in readable format</p>
+</li>
+<li><p class="first">Convert timestamps into a readable format with <a class="reference internal" href="access_jawbone.html#access_jawbone.format" title="access_jawbone.format"><tt class="xref py py-func docutils literal"><span class="pre">access_jawbone.format()</span></tt></a> function</p>
+</li>
+<li><dl class="first docutils">
+<dt>Create list of sleep events &#8216;xid&#8217; which serve as the input for <strong>EXAMPLE_2</strong></dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">returns:</th><td class="field-body"><tt class="docutils literal"><span class="pre">'xid'</span> <span class="pre">for</span> <span class="pre">each</span> <span class="pre">sleep</span> <span class="pre">event</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>EXAMPLE_2 :</strong> &#8220;GET&#8221; detailed data about sleep phases</dt>
+<dd><ul class="first last">
+<li><p class="first">Operate on the list of sleep events &#8216;xid&#8217; obtained in <strong>EXAMPLE_1</strong></p>
+</li>
+<li><p class="first">Insert sleep event <tt class="docutils literal"><span class="pre">xid[item]</span></tt> into detailed data request url <tt class="docutils literal"><span class="pre">'https://jawbone.com/nudge/api/sleeps/'</span> <span class="pre">+</span> <span class="pre">xid[item]</span> <span class="pre">+</span> <span class="pre">'/ticks'</span></tt></p>
+</li>
+<li><dl class="first docutils">
+<dt>Employ <a class="reference internal" href="access_jawbone.html#access_jawbone.get_data" title="access_jawbone.get_data"><tt class="xref py py-func docutils literal"><span class="pre">access_jawbone.get_data()</span></tt></a> to &#8220;GET&#8221; detailed sleep phase data</dt>
+<dd><table class="first last docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">returns:</th><td class="field-body"><tt class="docutils literal"><span class="pre">timing</span> <span class="pre">of</span> <span class="pre">sleep</span> <span class="pre">phases</span> <span class="pre">(1=awake,</span> <span class="pre">2=light</span> <span class="pre">sleep,</span> <span class="pre">3=sound</span> <span class="pre">sleep)</span></tt></td>
+</tr>
+</tbody>
+</table>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="access_jawbone.html" title="access_jawbone module"
+             >previous</a> |</li>
+        <li><a href="index.html">get_jawbone_data 1.0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, joceydunn.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

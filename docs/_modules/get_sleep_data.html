@@ -1,0 +1,202 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>get_sleep_data &mdash; get_jawbone_data 1.0.1 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="get_jawbone_data 1.0.1 documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">get_jawbone_data 1.0.1 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for get_sleep_data</h1><div class="highlight"><pre>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    .. module:: get_sleep_data</span>
+
+<span class="sd">    :synopsis: Example code to demonstrate how to &quot;GET&quot; JSON data from Jawbone UP API</span>
+<span class="sd">    </span>
+<span class="sd">    .. moduleauthor:: Jocelyn T. Dunn &lt;joceydunn2@gmail.com&gt;</span>
+<span class="sd">    </span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">access_jawbone</span> <span class="kn">import</span> <span class="o">*</span>
+
+<div class="viewcode-block" id="main"><a class="viewcode-back" href="../get_sleep_data.html#get_sleep_data.main">[docs]</a><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        To compile this example code, run the command: ``python get_sleep_data.py user_email user_password https://jawbone.com/nudge/api/users/@me/sleeps? &amp;``</span>
+<span class="sd">        </span>
+<span class="sd">    * **EXAMPLE_1 :** &quot;GET&quot; the bulk of sleep event data</span>
+<span class="sd">        * Use :py:func:`access_jawbone.args_store` to receive the command-line arguments</span>
+<span class="sd">            * arg1 - ``user_email`` associated with Jawbone account</span>
+<span class="sd">            * arg2 - ``user_password`` associated with Jawbone account</span>
+<span class="sd">            * arg3 - ``data request url`` for this example ``https://jawbone.com/nudge/api/users/@me/sleeps?``</span>
+<span class="sd">        * Run :py:func:`access_jawbone.authenticate` for secure access to jawbone data</span>
+<span class="sd">            :returns: ``security token``</span>
+<span class="sd">        * Employ :py:func:`access_jawbone.get_data` to &quot;GET&quot; sleep data from Jawbone API</span>
+<span class="sd">            :returns: ``user xid, event xid, date, sleep time, awake time, number of awakenings, duration of sleep event, quality score, etc.``</span>
+<span class="sd">        * Operate on JSON data dictionary and use JSON.dumps to print in readable format</span>
+<span class="sd">        * Convert timestamps into a readable format with :py:func:`access_jawbone.format` function</span>
+<span class="sd">        * Create list of sleep events &#39;xid&#39; which serve as the input for **EXAMPLE_2**</span>
+<span class="sd">            :returns: ``&#39;xid&#39; for each sleep event``</span>
+<span class="sd">            </span>
+<span class="sd">    * **EXAMPLE_2 :** &quot;GET&quot; detailed data about sleep phases</span>
+<span class="sd">        * Operate on the list of sleep events &#39;xid&#39; obtained in **EXAMPLE_1**</span>
+<span class="sd">        * Insert sleep event ``xid[item]`` into detailed data request url ``&#39;https://jawbone.com/nudge/api/sleeps/&#39; + xid[item] + &#39;/ticks&#39;``</span>
+<span class="sd">        * Employ :py:func:`access_jawbone.get_data` to &quot;GET&quot; detailed sleep phase data</span>
+<span class="sd">            :returns: ``timing of sleep phases (1=awake, 2=light sleep, 3=sound sleep)``</span>
+
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="c">#EXAMPLE_1: Get sleep data from url &#39;https://jawbone.com/nudge/api/users/@me/sleeps?&#39;</span>
+
+    <span class="c"># Use &#39;args_store&#39; function to save the command-line arguments: :arg1:, :arg2:, :arg3:</span>
+    <span class="p">[</span><span class="n">user</span><span class="p">,</span> <span class="n">passwd</span><span class="p">,</span> <span class="n">link</span><span class="p">]</span> <span class="o">=</span> <span class="n">args_store</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
+
+    <span class="c"># Run &#39;authenticate&#39; function for access to jawbone data</span>
+    <span class="n">token</span> <span class="o">=</span> <span class="n">authenticate</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">passwd</span><span class="p">)</span>
+
+    <span class="c"># Run &#39;get_data&#39; function to submit JSON request to jawbone API</span>
+    <span class="c"># Note adding &#39;&amp;limit=50&#39; to data_url changes the output limit (default is limit=10)</span>
+    <span class="n">link</span> <span class="o">=</span> <span class="n">link</span> <span class="o">+</span> <span class="p">(</span><span class="s">&#39;&amp;limit=15&#39;</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">get_data</span><span class="p">(</span><span class="n">link</span><span class="p">,</span> <span class="n">token</span><span class="p">)</span>
+
+    <span class="c"># Operate on the returned JSON data as a python dictionary</span>
+    <span class="c"># Note that, for this data_url, the returned JSON data contains &quot;meta&quot; and &quot;data&quot;</span>
+    <span class="n">meta</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;meta&#39;</span><span class="p">]</span>
+    <span class="n">data2</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">]</span>
+    
+    <span class="c"># Use JSON.dumps to print the resturned JSON data in a readable format</span>
+    <span class="c"># Use &#39;format&#39; function to convert timestamps into a readable format</span>
+
+    <span class="k">print</span> <span class="s">&#39;</span><span class="se">\n\n</span><span class="s">&#39;</span> <span class="o">+</span> <span class="s">&quot;SLEEP DATA for &quot;</span> <span class="o">+</span> <span class="n">user</span>
+    <span class="k">print</span> <span class="s">&quot;Fetched on &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">format</span><span class="p">(</span><span class="n">meta</span><span class="p">[</span><span class="s">&#39;time&#39;</span><span class="p">]))</span>
+
+    <span class="c"># Print &quot;meta&quot;</span>
+    <span class="k">print</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span> <span class="o">+</span> <span class="s">&quot;META&quot;</span>
+    <span class="k">print</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">meta</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="c"># Print keys of &quot;data&quot; dictionary</span>
+    <span class="k">print</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span> <span class="o">+</span> <span class="s">&quot;KEYS&quot;</span>
+    <span class="k">print</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data2</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="c"># Note that, for this &quot;data&quot;, the keys include &quot;size&quot;, &quot;link&quot;, and &quot;items&quot;</span>
+    <span class="n">items</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">][</span><span class="s">&#39;items&#39;</span><span class="p">]</span>
+    <span class="n">size</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;data&#39;</span><span class="p">][</span><span class="s">&#39;size&#39;</span><span class="p">]</span>
+
+    <span class="c"># Print the &quot;size&quot; (or number of &quot;items&quot;)</span>
+    <span class="k">print</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span> <span class="o">+</span> <span class="s">&quot;SIZE&quot;</span>
+    <span class="k">print</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="c"># Print the most recent sleep event (which is the first &quot;item&quot;)</span>
+    <span class="n">item</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">print</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span> <span class="o">+</span> <span class="s">&quot;ITEM &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s">&quot; of &quot;</span> <span class="o">+</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="n">item</span><span class="p">],</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="c"># Store the sleep event &#39;xid&#39; for each &quot;item&quot;</span>
+    <span class="k">print</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span> <span class="o">+</span> <span class="s">&quot;LIST OF SLEEP EVENTS: &#39;xid&#39; for each ITEM&quot;</span>
+    <span class="c"># Note that &#39;xid&#39; are used in EXAMPLE_2 to get more detailed data about each sleep event</span>
+    <span class="n">xid</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
+        <span class="n">xid</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s">&#39;xid&#39;</span><span class="p">])</span>
+    
+    <span class="k">print</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">xid</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+
+    <span class="c">#EXAMPLE_2: Get sleep phases, by adding event &#39;xid&#39; into url &#39;https://jawbone.com/nudge/api/sleeps/[xid]/ticks&#39;</span>
+
+    <span class="c"># Need &#39;xid&#39; from the list of sleep events obtained in EXAMPLE_1</span>
+    <span class="n">item</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c"># Add &#39;xid&#39; to the data_url request for detailed information about each sleep event</span>
+    <span class="n">link2</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="s">&#39;https://jawbone.com/nudge/api/sleeps/&#39;</span> <span class="o">+</span> <span class="n">xid</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="o">+</span> <span class="s">&#39;/ticks&#39;</span><span class="p">)</span>
+
+    <span class="c"># Run &#39;get_data&#39; functon with this new data request link</span>
+    <span class="n">data2</span> <span class="o">=</span> <span class="n">get_data</span><span class="p">(</span><span class="n">link2</span><span class="p">,</span> <span class="n">token</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s">&#39;</span><span class="se">\n</span><span class="s">&#39;</span> <span class="o">+</span> <span class="s">&quot;SLEEP PHASES for ITEM &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">print</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data2</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</div>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    
+    <span class="n">main</span><span class="p">()</span>
+
+    
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">get_jawbone_data 1.0.1 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, joceydunn.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>
