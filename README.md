@@ -1,6 +1,6 @@
 
-Homepage: (http://joceydunn.github.io/jawbone-magic/)
+Homepage: (http://joceydunn.github.io/get_jawbone_data/)
 
-Documentation: (http://joceydunn.github.io/jawbone-magic/html/index.html)
+Documentation: (http://joceydunn.github.io/get_jawbone_data/docs/index.html)
 
 Citation:
